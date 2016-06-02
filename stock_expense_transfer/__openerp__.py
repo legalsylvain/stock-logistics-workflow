@@ -18,6 +18,7 @@
         'views/view_stock_picking.xml',
         'views/action.xml',
         'views/menu.xml',
+        'views/view_stock_move.xml',
         'views/view_stock_picking_type.xml',
         'views/view_stock_picking_wizard_expense_transfer.xml',
     ],

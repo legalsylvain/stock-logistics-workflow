@@ -61,10 +61,10 @@ Generate Entries
 Road Map
 ========
 
-* this module computes inventory value for stock pickings based on related
+* this module computes inventory value for stock moves and based on related
   quants. It could be great to move this features into another generic module
-  ('stock_picking_inventory_value') and to make this module depends on the new
-  one.
+  ('stock_move_inventory_value') and to make this module depends on the new
+  one. (same for stock.picking)
 
 Usage
 =====

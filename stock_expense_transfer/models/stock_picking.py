@@ -17,7 +17,8 @@ class StockPicking(models.Model):
         related='picking_type_id.is_expense_transfer', store=True)
 
     inventory_value = fields.Float(
-        string='Inventory Value', compute="_compute_inventory_value")
+        string='Inventory Value', compute='_compute_inventory_value',
+        store=True)
 
     expense_transfer_move_id = fields.Many2one(
         comodel_name='account.move',
@@ -25,13 +26,11 @@ class StockPicking(models.Model):
 
     # Compute Section
     @api.multi
-    @api.depends(
-        'move_lines_related', 'move_lines_related.quant_ids',
-        'move_lines_related.quant_ids.inventory_value')
+    @api.depends('move_lines_related.inventory_value')
     def _compute_inventory_value(self):
         for picking in self:
-            picking.inventory_value = sum(
-                picking.mapped('move_lines_related.quant_ids.inventory_value'))
+            picking.inventory_value =\
+                sum(picking.mapped('move_lines_related.inventory_value'))
 
     # Custom Section
     @api.model
@@ -77,13 +76,10 @@ class StockPicking(models.Model):
                 for move in picking.move_lines_related:
                     account_id = move.product_id.product_tmpl_id.\
                         get_product_accounts()['expense']
-
-                    inventory_value = sum(
-                        move.mapped('quant_ids.inventory_value'))
                     if account_id in line_data:
-                        line_data[account_id] += inventory_value
+                        line_data[account_id] += move.inventory_value
                     else:
-                        line_data[account_id] = inventory_value
+                        line_data[account_id] = move.inventory_value
 
             # Create Main Account Move Line
             line_values = {

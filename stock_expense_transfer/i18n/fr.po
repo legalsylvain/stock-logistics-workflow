@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-30 10:19+0000\n"
-"PO-Revision-Date: 2016-05-30 10:19+0000\n"
+"POT-Creation-Date: 2016-06-02 15:13+0000\n"
+"PO-Revision-Date: 2016-06-02 15:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,12 +33,22 @@ msgstr "Créé le"
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_wizard_expense_transfer_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Afficher le nom"
 
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_type_expense_transfer_account_id
 msgid "Expense Transfer Account"
 msgstr "Compte comptable de transfert de charge"
+
+#. module: stock_expense_transfer
+#: model:ir.ui.view,arch_db:stock_expense_transfer.view_stock_picking_search
+msgid "Expense Transfer Accounting Entries Generated"
+msgstr "Ecritures de transfert de charge générées"
+
+#. module: stock_expense_transfer
+#: model:ir.ui.view,arch_db:stock_expense_transfer.view_stock_picking_search
+msgid "Expense Transfer Accounting Entries To Generate"
+msgstr "Ecritures de transfert de charge à générer"
 
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_expense_transfer_move_id
@@ -63,15 +73,10 @@ msgstr "Générer des écritures de transfert de charge"
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_wizard_expense_transfer_id
 msgid "ID"
-msgstr "ID"
+msgstr "Identifiant"
 
 #. module: stock_expense_transfer
-#: model:stock.location,name:stock_expense_transfer.stock_location_internal_use
-#: model:stock.picking.type,name:stock_expense_transfer.stock_picking_type_internal_use
-msgid "Internal Use (Expense Transfer Demo)"
-msgstr "Utilisation interne (Démo de transfert de charge)"
-
-#. module: stock_expense_transfer
+#: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_move_inventory_value
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_inventory_value
 msgid "Inventory Value"
 msgstr "Valeur d'inventaire"
@@ -90,17 +95,12 @@ msgstr "Dernière modification le"
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_wizard_expense_transfer_write_uid
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_wizard_expense_transfer_write_date
 msgid "Last Updated on"
-msgstr "Mis à jour le"
-
-#. module: stock_expense_transfer
-#: model:ir.model,name:stock_expense_transfer.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr "Colisage"
+msgstr "Dernière mise à jour le"
 
 #. module: stock_expense_transfer
 #: model:ir.model.fields,field_description:stock_expense_transfer.field_stock_picking_wizard_expense_transfer_selected_picking_qty
@@ -149,16 +149,6 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: stock_expense_transfer
-#: model:ir.ui.view,arch_db:stock_expense_transfer.view_stock_picking_search
-msgid "Expense Transfer Accounting Entries Generated"
-msgstr "Ecritures de transfert de charge générées"
-
-#. module: stock_expense_transfer
-#: model:ir.ui.view,arch_db:stock_expense_transfer.view_stock_picking_search
-msgid "Expense Transfer Accounting Entries To Generate"
-msgstr "Ecritures de transfert de charge à générer"
-
-#. module: stock_expense_transfer
 #: model:ir.actions.act_window,name:stock_expense_transfer.action_stock_picking_expense_transfer
 #: model:ir.ui.menu,name:stock_expense_transfer.menu_stock_picking_expense_transfer
 msgid "Transfer Expenses"
@@ -168,3 +158,9 @@ msgstr "Transferts de charge"
 #: model:ir.ui.view,arch_db:stock_expense_transfer.view_stock_picking_wizard_expense_transfer_form
 msgid "or"
 msgstr "ou"
+
+#. module: stock_expense_transfer
+#: model:ir.model,name:stock_expense_transfer.model_stock_picking_wizard_expense_transfer
+msgid "stock.picking.wizard.expense.transfer"
+msgstr "stock.picking.wizard.expense.transfer"
+
