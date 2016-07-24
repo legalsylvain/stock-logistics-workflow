@@ -28,21 +28,23 @@ class StockPickingType(models.Model):
         help="Set a Journal that will be used to write expense Transfer"
         " Accounting Entries.")
 
-    @api.one
+    @api.multi
     @api.constrains('default_location_src_id')
     def _constrains_default_location_src_id(self):
         for picking_type in self:
-            if picking_type.default_location_src_id.usage != 'internal':
+            if (picking_type.default_location_src_id.usage != 'internal'
+                    and picking_type.is_expense_transfer):
                 raise exceptions.Warning(_(
                     "Expense Transfer must have a Source location type"
                     " 'Internal'."))
 
-    @api.one
+    @api.multi
     @api.constrains('default_location_dest_id')
     def _constrains_default_location_dest_id(self):
         for picking_type in self:
-            if picking_type.default_location_dest_id.usage not in [
-                    'inventory', 'production', 'procurement', 'transit']:
+            if (picking_type.default_location_dest_id.usage not in [
+                    'inventory', 'production', 'procurement', 'transit']
+                    and picking_type.is_expense_transfer):
                 raise exceptions.Warning(_(
                     "Expense Transfer must have a destication location type"
                     " 'inventory Loss', 'Production', 'Procurement' or"
@@ -53,4 +55,4 @@ class StockPickingType(models.Model):
     def _compute_is_expense_transfer(self):
         for picking_type in self:
             picking_type.is_expense_transfer =\
-                picking_type.expense_transfer_account_id is not False
+                picking_type.expense_transfer_account_id.id is not False
