@@ -4,8 +4,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-
-from openerp import fields, models, api
+from openerp import fields, models, api, exceptions, _
 
 
 class StockPickingType(models.Model):
@@ -28,6 +27,26 @@ class StockPickingType(models.Model):
         string='Expense Transfer Journal', comodel_name='account.journal',
         help="Set a Journal that will be used to write expense Transfer"
         " Accounting Entries.")
+
+    @api.one
+    @api.constrains('default_location_src_id')
+    def _constrains_default_location_src_id(self):
+        for picking_type in self:
+            if picking_type.default_location_src_id.usage != 'internal':
+                raise exceptions.Warning(_(
+                    "Expense Transfer must have a Source location type"
+                    " 'Internal'."))
+
+    @api.one
+    @api.constrains('default_location_dest_id')
+    def _constrains_default_location_dest_id(self):
+        for picking_type in self:
+            if picking_type.default_location_dest_id.usage not in [
+                    'inventory', 'production', 'procurement', 'transit']:
+                raise exceptions.Warning(_(
+                    "Expense Transfer must have a destication location type"
+                    " 'inventory Loss', 'Production', 'Procurement' or"
+                    " 'Transit'."))
 
     @api.multi
     @api.depends('expense_transfer_account_id')

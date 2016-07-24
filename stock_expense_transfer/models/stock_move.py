@@ -23,10 +23,8 @@ class StockMove(models.Model):
         for move in self:
             inventory_value = 0.0
             if move.state == 'done':
-                # The inventory value is the sum of all quants that compose
-                # the destination location quants. (Possible negative quants
-                # are so ignored)
                 for quant in move.quant_ids:
-                    if quant.location_id == move.location_dest_id:
+                    if quant.location_id == move.location_dest_id\
+                            and quant.inventory_value > 0:
                         inventory_value += quant.inventory_value
             move.inventory_value = inventory_value

@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <filter name="available" position="after">
                 <filter name="transfer_expense_done" string="Expense Transfer Accounting Entries Generated" domain="[('is_expense_transfer','=', True), ('expense_transfer_move_id','!=', False)]"/>
-                <filter name="transfer_expense_todo" string="Expense Transfer Accounting Entries To Generate" domain="[('is_expense_transfer','=', True), ('expense_transfer_move_id','=', False)]"/>
+                <filter name="transfer_expense_todo" string="Expense Transfer Accounting Entries To Generate" domain="[('is_expense_transfer','=', True), ('expense_transfer_move_id','=', False), ('state', '=', 'done')]"/>
             </filter>
         </field>
     </record>

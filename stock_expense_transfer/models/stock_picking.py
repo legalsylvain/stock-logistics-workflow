@@ -22,7 +22,7 @@ class StockPicking(models.Model):
 
     expense_transfer_move_id = fields.Many2one(
         comodel_name='account.move',
-        string='Expense Transfer Accounting Entry')
+        string='Expense Transfer Accounting Entry', readonly=True, copy=False)
 
     # Compute Section
     @api.multi
